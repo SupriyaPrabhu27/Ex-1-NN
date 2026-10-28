@@ -1,7 +1,7 @@
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
-<H3>EX. NO.1</H3>
-<H3>DATE</H3>
+<H3>ENTER YOUR NAME</H3> SUPRIYA PRABHU
+<H3>ENTER YOUR REGISTER NO.</H3> 212224240165
+<H3>EX. NO.1</H3> 
+<H3>DATE</H3> 28-10-2026
 <H1 ALIGN =CENTER> Introduction to Kaggle and Data preprocessing</H1>
 
 ## AIM:
@@ -37,11 +37,77 @@ STEP 5:Normalizing the data<BR>
 STEP 6:Splitting the data into test and train<BR>
 
 ##  PROGRAM:
-TYPE YOUR CODE HERE
 
+```
+import pandas as pd
+import io
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+
+
+df = pd.read_csv(r"C:\Users\admin\TRAFFIC_DATA.csv")
+df
+
+
+df.isnull().sum()
+
+
+df = df.fillna(0)
+df.isnull().sum()
+
+
+df.duplicated()
+
+
+df = df.drop_duplicates()
+
+# Display statistical information
+df.describe()
+
+# Convert categorical columns into numerical values
+df = pd.get_dummies(df, drop_first=True, dtype=int)
+
+# Scale numerical columns
+inc_cols = df.select_dtypes(include=['number']).columns.tolist()
+scaler = StandardScaler()
+df[inc_cols] = scaler.fit_transform(df[inc_cols])
+
+df
+
+# Separate input and output
+x = df.iloc[:, :-1]
+y = df.iloc[:, -1]
+
+print("X Values")
+x
+
+print("Y Values")
+y
+
+# Split into training and testing data
+x_train, x_test, y_train, y_test = train_test_split(
+    x, y, test_size=0.2, random_state=42
+)
+
+print("X Training data")
+x_train
+
+print("X Testing data")
+x_test
+
+```
 
 ## OUTPUT:
-SHOW YOUR OUTPUT HERE
+
+
+<img width="1373" height="512" alt="image" src="https://github.com/user-attachments/assets/8dc11271-dd51-4bd2-aa18-adfc71239fe6" />
+
+
+<img width="1371" height="508" alt="image" src="https://github.com/user-attachments/assets/64fa5d5e-878f-4ba8-b95a-44189cf96ec7" />
+
+<img width="1391" height="467" alt="image" src="https://github.com/user-attachments/assets/518ac17a-f6aa-439a-8225-c9c101b297d5" />
+
 
 
 ## RESULT:
